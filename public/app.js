@@ -1,14 +1,22 @@
 import { onAuthChange } from './auth.js';
 import { renderLoginView } from './ui/login.js';
-// import { renderChatList } from './ui/chatList.js'; // later
+import { renderChatList } from './ui/chatList.js';
+import { renderHeader } from './ui/header.js';
 
 const appContainer = document.getElementById('app');
 
 onAuthChange(user => {
   if (user) {
-    // For now, let login.js handle logout UI too
-    // Later: renderChatList(appContainer, user);
-    renderLoginView(appContainer);
+    appContainer.innerHTML = `
+      <div id="header"></div>
+      <div id="main"></div>
+    `;
+
+    const headerEl = document.getElementById('header');
+    const mainEl = document.getElementById('main');
+
+    renderHeader(headerEl, user);
+    renderChatList(mainEl, user);
   } else {
     renderLoginView(appContainer);
   }

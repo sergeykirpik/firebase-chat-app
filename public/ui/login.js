@@ -1,6 +1,10 @@
-import { login, logout, onAuthChange } from '../auth.js';
+import { login } from '../auth.js';
 
-function renderLoggedOutView(container) {
+/**
+ * Render the login screen UI
+ * @param {HTMLElement} container 
+ */
+export function renderLoginView(container) {
   container.innerHTML = `
     <div class="login-screen">
       <h1>Welcome to Chat</h1>
@@ -15,37 +19,6 @@ function renderLoggedOutView(container) {
     } catch (err) {
       console.error(err);
       alert('Login failed');
-    }
-  });
-}
-
-function renderLoggedInView(container, user) {
-  container.innerHTML = `
-    <div class="user-header">
-      <div class="user-info">
-        <img class="avatar" src="${user.photoURL}" alt="${user.displayName}" />
-        <p>${user.displayName}</p>
-      </div>
-      <button id="logoutBtn">Logout</button>
-    </div>
-  `;
-
-  container.querySelector('#logoutBtn').addEventListener('click', async () => {
-    try {
-      await logout();
-    } catch (err) {
-      console.error(err);
-      alert('Logout failed');
-    }
-  });
-}
-
-export function renderLoginView(container) {
-  onAuthChange(user => {
-    if (user) {
-      renderLoggedInView(container, user);
-    } else {
-      renderLoggedOutView(container);
     }
   });
 }

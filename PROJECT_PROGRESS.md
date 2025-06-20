@@ -11,12 +11,26 @@
 - [x] User profile stored in Firestore on login
 - [x] Basic styling for logged-in and logged-out screens
 
-## ⏭️ Next Phase: Chat List
+## ✅ Phase 2: Chat List View
 
-- [ ] Fetch and display chat list for current user
-- [ ] Show last message preview + timestamp
-- [ ] Link to open chat view
-- [ ] Add new chat via email search
+- [x] Centralized Firestore access in `db.js`
+- [x] Modular `getUserChats()` with participant info enrichment
+- [x] Batched user lookup via `getUsers()`
+- [x] UI module `chatList.js` with clean rendering
+- [x] Manual test chats added to Firestore
+- [x] Global app header with logout button
+- [x] `login.js` refactored to pure login screen
+- [x] `app.js` as the root view controller
+
+---
+
+## ⏭️ Next Phase: Chat View & Messaging
+
+- [ ] Render full message history in `chatView.js`
+- [ ] Add new messages with `messageInput.js`
+- [ ] Edit/delete own messages
+- [ ] Update `lastMessage` field in `chats/`
+- [ ] Start new chats via email search (`newChatModal.js`)
 
 ---
 
