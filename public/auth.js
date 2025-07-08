@@ -34,3 +34,12 @@ export function logout() {
 export function onAuthChange(callback) {
   return onAuthStateChanged(auth, callback);
 }
+
+/**
+ * Get the current authenticated user
+ * @returns {firebase.User|null}
+ */
+export function getCurrentUser() {
+  return auth.currentUser;
+}
+

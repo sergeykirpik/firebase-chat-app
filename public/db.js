@@ -127,3 +127,16 @@ export async function getUserChats(userId) {
 
   return enrichChatsWithUsers(chatDocs, usersMap, userId);
 }
+
+/**
+ * Fetch messages for a chat, sorted by createdAt
+ * @param {string} chatId
+ * @returns {Promise<Array>} array of message objects
+ */
+export async function getChatMessages(chatId) {
+  const messagesRef = collection(db, 'chats', chatId, 'messages');
+  const q = query(messagesRef, orderBy('createdAt'));
+  const snapshot = await getDocs(q);
+  return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+}
+

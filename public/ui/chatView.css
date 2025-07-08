@@ -1,0 +1,41 @@
+/* public/ui/chatView.css */
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  background: #f9f9f9;
+}
+
+.message {
+  max-width: 70%;
+  padding: 0.5rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  position: relative;
+}
+
+.message.sent {
+  align-self: flex-end;
+  background: #dcf8c6;
+}
+
+.message.received {
+  align-self: flex-start;
+  background: #fff;
+  border: 1px solid #ddd;
+}
+
+.message-text {
+  margin-bottom: 0.25rem;
+  word-wrap: break-word;
+}
+
+.message-time {
+  font-size: 0.75rem;
+  color: #666;
+  text-align: right;
+}
