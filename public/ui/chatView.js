@@ -32,7 +32,11 @@ export async function renderChatView(container, chatId) {
       `;
     }).join('');
 
-    container.innerHTML = `<div class="messages">${messagesHtml}</div>`;
+    container.innerHTML = `
+      <div class="chat-view-wrapper">
+        <div class="messages">${messagesHtml}</div>
+      </div>
+    `;
 
     const messagesEl = container.querySelector('.messages');
     messagesEl.scrollTop = messagesEl.scrollHeight;

@@ -1,160 +1,55 @@
----
+# Firebase Chat App Specification (Updated)
 
-# Firebase 1:1 Chat App – Specification
+## ✅ Completed Features
 
-## 📌 Purpose
+### 🔐 Authentication
+- **Login**: Implemented via Firebase `signInWithEmailAndPassword`
+- **Logout**: Via Firebase `signOut`
+- **Session Persistence**: `onAuthStateChanged` used to maintain session
 
-A lightweight, serverless web chat application for private 1:1 messaging between friends or family members. Built with Firebase and deployed as a responsive single-page web app.
+### 🗺️ Routing
+- Hash-based routing with views: `login`, `chatList`, `chatView`
+- Dynamically loads page-specific JS and sets header
 
----
+### 🧱 App Bootstrap
+- Firebase initialized via `firebaseConfig`
+- DOMContentLoaded initializes routing
 
-## ✅ Core Features
+### 💬 Chat Functionality
+- **Chat List**: Lists threads user is part of from `chatThreads`
+- **Chat View**: Loads thread messages in real-time using `onSnapshot`
+- **Send Message**: User can send messages; stored in Firestore under `messages` collection
 
-- Google Sign-In via Firebase Auth
-- 1:1 real-time messaging (no groups)
-- Chat list with last message preview
-- Edit/delete own messages
-- Message history
-- Responsive UI for desktop and mobile
-- No presence, typing indicators, or notifications
+### 📁 Firebase Abstraction
+- `db.js` abstracts Firestore interaction: getChats, listenToMessages, sendMessage
 
----
+### 🧭 Header
+- Displays current user
+- Logout button included
 
-## 🧱 Tech Stack
+### 🎨 Styling
+- Core layout and basic responsive styles
 
-- **Frontend**: Vanilla JavaScript (ES6+), HTML, CSS
-- **Backend**: Firebase (Auth, Firestore, Hosting)
+## 🔧 Features In Progress / Not Implemented
 
----
+### 👤 User Registration
+- Not yet implemented
+- Planned via `createUserWithEmailAndPassword`
 
-## 🔢 Firestore Data Model
+### ➕ Chat Creation
+- No UI or logic to create a new chat thread
+- Spec target: allow naming chat + selecting users
 
-### `users/{userId}`
+### 👥 Chat Participants Management
+- No support for managing participants in chat threads
 
-```json
-{
-  "displayName": "string",
-  "photoURL": "string",
-  "email": "string",
-  "createdAt": "timestamp"
-}
-```
+### ⚠️ Error Handling
+- Basic login error messages only
+- Need user-friendly error display across app
 
-### `chats/{chatId}`
-
-```json
-{
-  "participants": ["userId1", "userId2"],
-  "createdAt": "timestamp",
-  "lastMessage": {
-    "text": "string",
-    "timestamp": "timestamp",
-    "senderId": "string"
-  }
-}
-```
-
-### `chats/{chatId}/messages/{messageId}`
-
-```json
-{
-  "senderId": "string",
-  "text": "string",
-  "createdAt": "timestamp",
-  "editedAt": "timestamp (optional)",
-  "deleted": "boolean"
-}
-```
-
-### Chat ID Convention
-
-- Deterministic: `chatId = userA_userB` (sorted alphabetically)
-
----
-
-## 🧭 App Flow
-
-### 1. Login
-
-- Google sign-in
-- Store user profile in `users/{userId}`
-
-### 2. Chat List
-
-- Display all chats where `participants` contains `currentUserId`
-- Last message preview and timestamp
-- New chat: search user by email → open or create chat
-
-### 3. Chat View
-
-- Stream messages from `messages` subcollection
-- Edit/delete own messages
-- Input box to send new messages
-
----
-
-## 🔐 Firestore Security Rules (Minimal, Dev-Ready)
-
-```js
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if request.auth != null;
-    }
-  }
-}
-```
-
----
-
-## 🧩 Frontend File Structure
-
-```
-/public
-  ├── index.html
-  ├── styles.css
-  ├── app.js
-  ├── auth.js
-  ├── db.js
-  ├── ui/
-  │   ├── login.js
-  │   ├── chatList.js
-  │   ├── chatView.js
-  │   ├── newChatModal.js
-  │   └── messageInput.js
-  └── utils/
-      ├── firebase-init.js
-      └── helpers.js
-```
-
----
-
-## 🔧 Key Modules
-
-### `firebase-init.js`
-
-- Firebase app, auth, firestore init
-
-### `auth.js`
-
-- Google login/logout
-- Track auth state
-
-### `db.js`
-
-- Fetch/create chats
-- Fetch/send/edit/delete messages
-
-### `/ui/*.js`
-
-- Render and manage each view/component
-
----
-
-## 🏁 Status
-
-- ✅ Planning complete
-- ✅ Spec complete
-- 🚧 Ready to begin development
+## 🔜 Next Steps
+1. Implement user registration
+2. Add UI and logic for creating a new chat
+3. Implement participant selection and updates
+4. Improve error messages and feedback
 

@@ -1,12 +1,13 @@
 import { getUserChats } from '../db.js';
-import { renderChatView } from './chatView.js';
+import { navigateTo } from '../router.js';
+import { getCurrentUser } from '../auth.js';
 
 /**
  * Render the chat list view for the logged-in user
  * @param {HTMLElement} container
- * @param {firebase.User} user
  */
-export async function renderChatList(container, user, onChatSelect) {
+export async function renderChatList(container) {
+  const user = getCurrentUser();
   container.innerHTML = `<p>Loading chats...</p>`;
 
   try {
@@ -40,9 +41,8 @@ export async function renderChatList(container, user, onChatSelect) {
     container.querySelectorAll('.chat-item').forEach(item => {
       item.addEventListener('click', () => {
         const chatId = item.dataset.chatId;
-        const chatViewContainer = document.getElementById('chat-view');
-        if (chatViewContainer && chatId) {
-          onChatSelect(chatId);
+        if (chatId) {
+          navigateTo(`#/chat/${chatId}`);
         }
       });
     });

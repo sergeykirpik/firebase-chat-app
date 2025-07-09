@@ -1,4 +1,5 @@
 import { login } from '../auth.js';
+import { navigateTo } from '../router.js';
 
 /**
  * Render the login screen UI
@@ -16,6 +17,7 @@ export function renderLoginView(container) {
   container.querySelector('#loginBtn').addEventListener('click', async () => {
     try {
       await login();
+      navigateTo('#/');
     } catch (err) {
       console.error(err);
       alert('Login failed');

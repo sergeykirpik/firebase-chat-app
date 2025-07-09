@@ -1,16 +1,22 @@
 /* public/ui/chatView.css */
 
-.messages {
+.chat-view-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #f9f9f9;
+}
+
+.chat-view-wrapper .messages {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   padding: 1rem;
   max-height: calc(100vh - 120px);
   overflow-y: auto;
-  background: #f9f9f9;
 }
 
-.message {
+.chat-view-wrapper .message {
   max-width: 70%;
   padding: 0.5rem 0.75rem;
   border-radius: 12px;
@@ -18,23 +24,23 @@
   position: relative;
 }
 
-.message.sent {
+.chat-view-wrapper .message.sent {
   align-self: flex-end;
   background: #dcf8c6;
 }
 
-.message.received {
+.chat-view-wrapper .message.received {
   align-self: flex-start;
   background: #fff;
   border: 1px solid #ddd;
 }
 
-.message-text {
+.chat-view-wrapper .message-text {
   margin-bottom: 0.25rem;
   word-wrap: break-word;
 }
 
-.message-time {
+.chat-view-wrapper .message-time {
   font-size: 0.75rem;
   color: #666;
   text-align: right;
